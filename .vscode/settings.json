@@ -1,0 +1,10 @@
+{
+    "code-runner.executorMap": {
+        "java": "cd $dir && javac -encoding utf-8 $fileName && java $fileNameWithoutExt"
+    },
+    "code-runner.clearPreviousOutput": true,
+    "code-runner.runInTerminal": true,
+    //"terminal.integrated.shellArgs.windows": ["/K chcp 65001 >nul"],
+    //"terminal.integrated.fontFamily": "Lucida Console",
+    //"code-runner.runInTerminal": true
+}

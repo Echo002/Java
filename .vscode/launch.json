@@ -1,0 +1,124 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - PolandNotation",
+            "request": "launch",
+            "mainClass": "PolandNotation",
+            "projectName": "Java_d9bb640a"
+        },
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - ArrayQueueDemo",
+            "request": "launch",
+            "mainClass": "arraytable.ArrayQueueDemo",
+            "projectName": "Java_d9bb640a"
+        },
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - SparseArray",
+            "request": "launch",
+            "mainClass": "SparseArray",
+            "projectName": "Java_8e08c3f4"
+        },
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - Calculator",
+            "request": "launch",
+            "mainClass": "Calculator",
+            "projectName": "Java_8e08c3f4"
+        },
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - DoubleLinkedListDemo",
+            "request": "launch",
+            "mainClass": "arraytable.DoubleLinkedListDemo"
+        },
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - CircleArrayDemo",
+            "request": "launch",
+            "mainClass": "arraytable.CircleArrayDemo"
+        },
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - ArrayQueueDemo",
+            "request": "launch",
+            "mainClass": "Java.arraytable.ArrayQueueDemo"
+        },
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - Calculator",
+            "request": "launch",
+            "mainClass": "arraytable.Calculator",
+            "projectName": "Java_d9bb640a"
+        },
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - ArrayStackDemo",
+            "request": "launch",
+            "mainClass": "arraytable.ArrayStackDemo",
+            "projectName": "Java_d9bb640a"
+        },
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - Josepfu",
+            "request": "launch",
+            "mainClass": "Josepfu",
+            "projectName": "Java_d9bb640a"
+        },
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - DoubleLinkedListDemo",
+            "request": "launch",
+            "mainClass": "DoubleLinkedListDemo",
+            "projectName": "Java_d9bb640a"
+        },
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - SingleLinkedListDemo",
+            "request": "launch",
+            "mainClass": "SingleLinkedListDemo",
+            "projectName": "Java_d9bb640a"
+        },
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - test",
+            "request": "launch",
+            "mainClass": "test",
+            "projectName": "Java_d9bb640a"
+        },
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - ArrayQueueDemo",
+            "request": "launch",
+            "mainClass": "ArrayQueueDemo",
+            "projectName": "Java_d9bb640a"
+        },
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - ArrQueue",
+            "request": "launch",
+            "mainClass": "ArrQueue",
+            "projectName": "Java_d9bb640a"
+        },
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - SparseArray",
+            "request": "launch",
+            "mainClass": "SparseArray",
+            "projectName": "Java_d9bb640a"
+        },
+        {
+            "type": "java",
+            "name": "Debug (Launch) - Current File",
+            "request": "launch",
+            "mainClass": "${file}",
+            "console": "internalConsole"
+        }
+    ]
+}
