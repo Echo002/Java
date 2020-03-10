@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "CodeLens (Launch) - Queue8",
+            "request": "launch",
+            "mainClass": "Queue8",
+            "projectName": "Java_8e08c3f4"
+        },
+        {
+            "type": "java",
             "name": "CodeLens (Launch) - PolandNotation",
             "request": "launch",
             "mainClass": "PolandNotation",
