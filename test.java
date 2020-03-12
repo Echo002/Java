@@ -1,16 +1,21 @@
-public static void selectSort(int[] arr){
-    for(int i = 0; i < arr.length - 1; i++){
-        int minIndex = i;
-        int min = arr[i];
-        for(int j = i+1; j < arr.length; j++){
-            if(min > arr[j]){ // 从大到小排只需修改这一行代码
-                minIndex = j;
-                min = arr[j];
-            }
+public static void insertSort(int[] arr){
+    int insertVal = 0;
+    int insertIndex = 0;
+    for(int i = 1; i < arr.length; i++){
+        insertVal = arr[i];
+        insertIndex = i - 1;
+
+        // 不越界、待插入的数没有找到插入位置
+        while(insertIndex >= 0 && insertVal < arr[insertIndex]){
+            arr[insertIndex + 1] = arr[insertIndex];
+            insertIndex --;
         }
-        if(minIndex != i){
-            arr[minIndex] = arr[i];
-            arr[i] = min;
-        }
+        // 当退出while循环时，说明插入的位置找到
+
+        // 判断是否需要赋值
+        if(insertIndex + 1 != i)
+            arr[insertIndex + 1] = insertVal;
+        // System.out.println("第"+i+"轮插入后");
+        // System.out.println(Arrays.toString(arr));
     }
 }
