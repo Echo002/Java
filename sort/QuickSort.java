@@ -21,7 +21,7 @@ public class QuickSort{
                 l++;
             }
 
-            while(arr[r] < pivot){
+            while(arr[r] > pivot){
                 r--;
             }
             // 说明pivot左右的值，已经按照左边全部是小于等于pivot的值
@@ -42,6 +42,17 @@ public class QuickSort{
             if(arr[r] == pivot){
                 l += 1;
             }
+        }
+        if(l == r){
+            l++;
+            r--;
+        }
+        // 向左递归
+        if(left < r){
+            quickSort(arr, left, r);
+        }
+        if(right > l){
+            quickSort(arr, l, right);
         }
     }
 }

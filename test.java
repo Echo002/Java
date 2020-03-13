@@ -1,19 +1,49 @@
-// 希尔排序(移位法)
-public static void shellSort2(int[] arr){
-    for(int gap = arr.length / 2; gap > 0; gap /= 2){
-        // 从第gap个元素，逐个对其所在的组进行直接插入排序
-        for(int i = gap; i < arr.length; i++){
-            int j = i;
-            int temp = arr[j];
-            if(arr[j] < arr[j =gap]){
-                while(j - gap >= 0 && temp < arr[j - gap]){
-                    // 移动
-                    arr[j] = arr[j - gap];
-                    j -= gap;
-                }
-                // 退出循环说明找到了插入的位置
-                arr[j] = temp;
+public class test{
+    public static void quickSort(int[] arr, int left, int right){
+        int l = left;
+        int r = right;
+        int pivot = arr[(left + right) / 2];
+        int temp = 0;
+    
+        // while循环的目的是让比pivot小的放到左边，大的放到右边
+        while(l < r){
+            // 在左边一直找，找到大于等于pivot值才退出 
+            while(arr[l] < pivot){
+                l++;
             }
+    
+            while(arr[r] > pivot){
+                r--;
+            }
+            // 说明pivot左右的值，已经按照左边全部是小于等于pivot的值
+            // 右边全部是大于等于pivot的值
+            if(l >= r){
+                break;
+            }
+            // 交换
+            temp = arr[l];
+            arr[l] = arr[r];
+            arr[r] = temp;
+    
+            // 交换完成后发现arr[l] == pivot r--(前移)
+            if(arr[l] == pivot){
+                r -= 1;
+            }
+            // 交换完成后发现arr[r] == pivot l++(前移)
+            if(arr[r] == pivot){
+                l += 1;
+            }
+        }
+        if(l == r){
+            l++;
+            r--;
+        }
+        // 向左递归
+        if(left < r){
+            quickSort(arr, left, r);
+        }
+        if(right > l){
+            quickSort(arr, l, right);
         }
     }
 }
