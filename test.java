@@ -1,21 +1,19 @@
-public static void insertSort(int[] arr){
-    int insertVal = 0;
-    int insertIndex = 0;
-    for(int i = 1; i < arr.length; i++){
-        insertVal = arr[i];
-        insertIndex = i - 1;
-
-        // 不越界、待插入的数没有找到插入位置
-        while(insertIndex >= 0 && insertVal < arr[insertIndex]){
-            arr[insertIndex + 1] = arr[insertIndex];
-            insertIndex --;
+// 希尔排序(移位法)
+public static void shellSort2(int[] arr){
+    for(int gap = arr.length / 2; gap > 0; gap /= 2){
+        // 从第gap个元素，逐个对其所在的组进行直接插入排序
+        for(int i = gap; i < arr.length; i++){
+            int j = i;
+            int temp = arr[j];
+            if(arr[j] < arr[j =gap]){
+                while(j - gap >= 0 && temp < arr[j - gap]){
+                    // 移动
+                    arr[j] = arr[j - gap];
+                    j -= gap;
+                }
+                // 退出循环说明找到了插入的位置
+                arr[j] = temp;
+            }
         }
-        // 当退出while循环时，说明插入的位置找到
-
-        // 判断是否需要赋值
-        if(insertIndex + 1 != i)
-            arr[insertIndex + 1] = insertVal;
-        // System.out.println("第"+i+"轮插入后");
-        // System.out.println(Arrays.toString(arr));
     }
 }
