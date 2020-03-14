@@ -1,49 +1,50 @@
 public class test{
-    public static void quickSort(int[] arr, int left, int right){
-        int l = left;
-        int r = right;
-        int pivot = arr[(left + right) / 2];
-        int temp = 0;
-    
-        // while循环的目的是让比pivot小的放到左边，大的放到右边
-        while(l < r){
-            // 在左边一直找，找到大于等于pivot值才退出 
-            while(arr[l] < pivot){
-                l++;
-            }
-    
-            while(arr[r] > pivot){
-                r--;
-            }
-            // 说明pivot左右的值，已经按照左边全部是小于等于pivot的值
-            // 右边全部是大于等于pivot的值
-            if(l >= r){
-                break;
-            }
-            // 交换
-            temp = arr[l];
-            arr[l] = arr[r];
-            arr[r] = temp;
-    
-            // 交换完成后发现arr[l] == pivot r--(前移)
-            if(arr[l] == pivot){
-                r -= 1;
-            }
-            // 交换完成后发现arr[r] == pivot l++(前移)
-            if(arr[r] == pivot){
-                l += 1;
-            }
-        }
-        if(l == r){
-            l++;
-            r--;
-        }
-        // 向左递归
-        if(left < r){
-            quickSort(arr, left, r);
-        }
-        if(right > l){
-            quickSort(arr, l, right);
+// 合并
+/*
+arr 排序的原始数组
+left 左边有序序列的初始索引
+mid 中间索引
+right 右边索引
+temp 中转数组
+*/
+public static void merge(int[] arr, int left, int mid, int right, int[] temp){
+    int i = left;       // 初始化i，左边有序序列的初始索引
+    int j = mid + 1;    // 初始化j，右边有序序列的初始索引
+    int t = 0;          // 指向temp数组的当前索引
+
+    // 先将左右两边（有序）的数据按照规则填充到temp，直到左右两边全部处理完毕
+    while(i <= mid && j<= right){
+        if(arr[i] <= arr[j]){
+            // 左边小于等于右边时，则进行填充 然后t往后移
+            temp[t] = arr[i];
+            t++;
+            i++;
+        }else{
+            temp[t] = arr[j];
+            t++;
+            j++;
         }
     }
+    // 把有剩余数据的一边的数据依次填充到temp中
+    while(i <= mid){  // 左边剩余
+        temp[t] = arr[i];
+        t++;
+        i++;
+    }
+    while(j <= right){  // 左边剩余
+        temp[t] = arr[j];
+        t++;
+        j++;
+    }
+
+    // 将temp数组的元素拷贝到arr中(并不是每次都拷贝全部)
+    t = 0;
+    int tempLeft = left;
+    while(tempLeft <= right){
+        arr[tempLeft] = temp[t];
+        t++;
+        tempLeft++;
+    }
+
+}
 }
