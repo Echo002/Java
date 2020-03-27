@@ -1,6 +1,12 @@
-<<<<<<< HEAD
-=======
-public class test{
+import java.util.Arrays;
+
+public class RadixSort {
+    public static void main(String[] args){
+        int arr[] = {53, 3, 542, 748, 14, 214};
+        radixSort(arr);
+        System.out.println("1:" + Arrays.toString(arr));
+    }
+
     public static void radixSort(int[] arr){
         // 得到数组中最大的数的位数
         int max = arr[0];
@@ -44,4 +50,3 @@ public class test{
         }
     }
 }
->>>>>>> 41827935ded7a41a4e3b990d49698917c4bddcdb
