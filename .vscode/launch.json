@@ -132,7 +132,7 @@
             "name": "Debug (Launch) - Current File",
             "request": "launch",
             "mainClass": "${file}",
-            "console": "internalConsole"
+            "console": "integratedTerminal"
         }
     ]
 }
