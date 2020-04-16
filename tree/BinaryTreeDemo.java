@@ -14,22 +14,29 @@ public class BinaryTreeDemo{
         node3.setRight(node4);
         node3.setLeftNode(node5);
         binaryTree.setRoot(root);
-        // 测试
-        System.out.println("前序遍历");
-        binaryTree.preOrder();
-        System.out.println("中序遍历");
-        binaryTree.infixOrder();
-        System.out.println("后序遍历");
-        binaryTree.postOrder();
+        // 测试遍历
+        // System.out.println("前序遍历");
+        // binaryTree.preOrder();
+        // System.out.println("中序遍历");
+        // binaryTree.infixOrder();
+        // System.out.println("后序遍历");
+        // binaryTree.postOrder();
 
-        // 测试
-        System.out.println("前序遍历查找");
-        HeroNode resNode = binaryTree.preOrderSearch(5);
-        if(resNode != null){
-            System.out.printf("找到了，信息为 no = %d name = %s", resNode.getNo(), resNode.getName());
-        }else{
-            System.out.printf("没有找到 no = %d 的英雄", 5);
-        }
+        // 测试查找
+        // System.out.println("前序遍历查找");
+        // HeroNode resNode = binaryTree.preOrderSearch(5);
+        // if(resNode != null){
+        //     System.out.printf("找到了，信息为 no = %d name = %s", resNode.getNo(), resNode.getName());
+        // }else{
+        //     System.out.printf("没有找到 no = %d 的英雄", 5);
+        // }
+
+        // 测试删除
+        System.out.println("删除前，前序遍历");
+        binaryTree.preOrder();
+        binaryTree.delNode(5);
+        System.out.println("删除后，前序遍历");
+        binaryTree.preOrder();
     }
 }
 
@@ -88,7 +95,20 @@ class BinaryTree{
             return null;
         }
     }
-    
+
+    // 删除节点
+    public void delNode(int no){
+        if(root != null){
+            if(root.getNo() == no){
+                root = null;
+            }else{
+                // 进行递归删除
+                root.delNode(no);
+            }
+        }else{
+            System.out.println("空树~不能删除");
+        }
+    }
 }
 
 class HeroNode{
@@ -224,5 +244,23 @@ class HeroNode{
             return this;
         }
         return resNode;
+    }
+
+    // 删除节点
+    public void delNode(int no){
+        if(this.left != null && this.left.no == no){
+            this.left = null;
+            return;
+        }
+        if(this.right != null && this.right.no == no){
+            this.right = null;
+            return;
+        }
+        if(this.left != null){
+            this.left.delNode(no);
+        }
+        if(this.right != null){
+            this.right.delNode(no);
+        }
     }
 }
