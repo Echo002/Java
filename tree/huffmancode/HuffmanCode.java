@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Map;
 import java.util.List;
@@ -25,7 +26,8 @@ public class HuffmanCode {
         System.out.println("HuffmanCodeList:" + huffmanCodes);
 
         // 测试
-        zip(contentBytes, huffmanCodes);
+        byte[] huffmanCodeBytes = zip(contentBytes, huffmanCodes);
+        System.out.println("huffmanCodeBytes:" + huffmanCodeBytes);
     }
 
     // 将字符数组通过Huffman编码表编码之后的Huffman编码
@@ -33,7 +35,7 @@ public class HuffmanCode {
     bytes: 原始字符串对应的byte[]
     huffmanCodes: 生成的huffman编码map
     */
-    private static Byte[] zip(byte[] bytes, Map<Byte, String> huffmanCodes){
+    private static byte[] zip(byte[] bytes, Map<Byte, String> huffmanCodes){
         // 1. 利用huffmanCodes将bytes转成Huffman编码对应的字符串
         StringBuilder stringbuilder = new StringBuilder();
         // 遍历bytes数组
@@ -51,13 +53,19 @@ public class HuffmanCode {
 
         // 创建存储压缩后的byte数组
         byte[] huffmanCodeBytes = new byte[len];
-        int index;
+        int index = 0;
         for(int i = 0; i < stringbuilder.length(); i += 8){ // 每8位对应一个byte
             String strByte;
-            strByte = stringbuilder.substring(i, i + 8);
+            if(i+8 > stringbuilder.length()){
+                strByte = stringbuilder.substring(i);
+            }else{
+                strByte = stringbuilder.substring(i, i + 8);
+            }
             // 将strByte转化成一个byte放入
-            
+            huffmanCodeBytes[index] = (byte)Integer.parseInt(strByte, 2);
+            index++;
         }
+        return huffmanCodeBytes;
     }
 
     // 生成Huffman树对应的Huffman编码
