@@ -62,11 +62,46 @@ public class HuffmanCode {
      * @param srcFile 源文件路径
      * @param dstFile 目标文件路径
      */
+    // 思路
+    /*
+     * 1. 将huffmanCodeBytes重写转换成赫夫曼编码对应的二进制
+     * 2. 对照编码将二进制字符串转化为原字符串
+     */
     public static void unZipFile(String zipFile, String dstFile){
         // 定义文件输入流
         InputStream is = null;
         // 定义一个对象输输入流
         ObjectInputStream ois = null;
+        // 定义文件的输出流
+        OutputStream os = null;
+        try {
+            // 创建文件输入流
+            is = new FileInputStream(zipFile);
+            // 创建一个和is关联的对象输入流
+            ois = new ObjectInputStream(is);
+            // 读取byte数组
+            byte[] huffmanBytes = (byte[])ois.readObject();
+            // 读取赫夫曼编码表
+            Map<Byte, String> codes = ois.readObject();
+
+            // 解码
+            byte[] bytes = decode(huffmanCodes, huffmanBytes);
+            // 将bytes数组写到目标文件
+            new FileOutputStream(dstFile);
+            // 写数据到文件中
+            os.write(bytes);
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        } finally {
+            try {
+                os.close();
+                ois.close();
+                is.close();
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+        }
     }
 
     // 编写一个方法，将一个文件进行压缩
@@ -108,13 +143,6 @@ public class HuffmanCode {
         }
         
     }
-
-    // 完成数据的解压
-    // 思路
-    /*
-     * 1. 将huffmanCodeBytes重写转换成赫夫曼编码对应的二进制
-     * 2. 对照编码将二进制字符串转化为原字符串
-     */
 
     /*
      * 
@@ -267,7 +295,7 @@ public class HuffmanCode {
         StringBuilder stringBuilder2 = new StringBuilder(stringBuilder);
         // 将code加入到stringBuilder2中
         stringBuilder2.append(code);
-        if(node != null){       // 如果node == null不处理
+        if(node != null){// 如果node == null不处理
             // 判断当前节点是否为叶子节点
             if(node.data == null){  // 非叶子节点
                 // 递归处理
@@ -278,7 +306,6 @@ public class HuffmanCode {
             }
         }
     }
-
 
     // 前序遍历
     private static void preOrder(Node root){
