@@ -1,26 +1,27 @@
-public class BinarySortTreeDemo {
+public class AVLTreeDemo {
     public static void main(String[] args) {
-        int[] arr = {7, 3, 10, 12, 5, 1, 9, 2};
-        BinarySortTree binarySortTree = new BinarySortTree();
-        // 循环添加结点到二叉排序树
+        // int[] arr = {4, 3, 6, 5, 7, 8};
+        int[] arr = {10, 12, 7, 6, 8, 9};
+        AVLTree avltree = new AVLTree();
+        // 添加结点
         for(int i = 0; i < arr.length; i++){
-            binarySortTree.add(new Node(arr[i]));
+            avltree.add(new Node(arr[i]));
         }
-
-        // 中序
-        System.out.println("中序遍历二叉树");
-        binarySortTree.infixOrder();
-
-        // 测试删除叶子结点
-        binarySortTree.delNode(10);
-        System.out.println("删除结点后");
-        binarySortTree.infixOrder();
+        System.out.println("中序遍历");
+        avltree.infixOrder();
+        System.out.println("树的根节点为：" + avltree.getRoot());
+        System.out.println("树的高度为：" + avltree.getRoot().height());
+        System.out.println("左子树的高度为：" + avltree.getRoot().leftHeight());
+        System.out.println("右子树的高度为：" + avltree.getRoot().rightHeight());
     }
 }
 
-// 创建二叉排序树
-class BinarySortTree{
+// 创建AVLTree 与BinarySortTree相同
+class AVLTree{
     private Node root;
+    public Node getRoot(){
+        return root;
+    }
 
     // 查找结点
     public Node search(int value){
@@ -137,6 +138,61 @@ class Node{
         this.value = value;
     }
 
+
+    // 返回左子树的高度
+    public int leftHeight(){
+        if(left == null){
+            return 0;
+        } else {
+            return left.height();
+        }
+    }
+    // 返回右子树的高度
+    public int rightHeight(){
+        if(right == null){
+            return 0;
+        } else {
+            return right.height();
+        }
+    }
+
+    // 返回当前结点为根节点的树的高度
+    public int height(){
+        return Math.max(left == null ? 0 : left.height(), right == null ? 0 : right.height()) + 1;
+    }
+
+    // 左旋转
+    private void leftRotate(){
+        // 1. 创建新的结点，值等于当前根节点的值
+        Node newNode = new Node(value);
+        // 2. 把新的结点的左子树设置成当前结点的左子树
+        newNode.left = left;
+        // 3. 把新的结点的右子树设置成当前结点右子树的左子树
+        newNode.right = right.left;
+        // 4. 把当前结点的值替换成右子结点的值
+        value = right.value;
+        // 5.  把当前结点的右子树设置成当前结点右子树的右子树
+        right = right.right;
+        // 6. 把当前结点的左子树设置成新的结点
+        left = newNode;
+    }
+
+    // 右旋转
+    private void rightRotate(){
+        // 1. 创建新的结点，值等于当前根节点的值
+        Node newNode = new Node(value);
+        // 2. 把新的结点的右子树设置成当前结点的右子树
+        newNode.right = right;
+        // 3. 把新的结点的左子树设置成当前结点左子树的右子树
+        newNode.left = left.right;
+        // 4. 把当前结点的值替换成左子结点的值
+        value = left.value;
+        // 5.  把当前结点的右子树设置成当前结点左子树的左子树
+        right = left.left;
+        // 6. 把当前结点的左子树设置成新的结点
+        left = newNode;
+    }
+
     // 查找结点
     public Node search(int value){
         if(value == this.value){
@@ -196,6 +252,32 @@ class Node{
             } else{
                 this.right.add(node);
             }
+        }
+
+        // 当添加完一个结点后，如果右子树的高度 - 左子树的高度 > 1 就左旋转
+        if(rightHeight() - leftHeight() > 1){
+            // 如果它的右子树的左子树高度大于其右子树的高度
+            if(right != null && right.rightHeight() < right.leftHeight()){
+                // 先对右子树进行右旋转
+                right.rightRotate();
+                leftRotate();
+            } else {
+                leftRotate();
+            }
+            return ;
+        }
+
+        // 当添加完一个结点后，如果左子树的高度 - 右子树的高度 > 1 就右旋转
+        if(leftHeight() - rightHeight() > 1){
+            // 如果它的左子树的右子树高度大于其左子树的高度
+            if(left != null && left.rightHeight() > left.leftHeight()){
+                // 先要对左子树进行左旋转
+                left.leftRotate();
+                rightRotate();
+            } else {
+                rightRotate();
+            }
+            
         }
     }
 
