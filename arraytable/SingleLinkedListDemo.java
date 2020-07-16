@@ -1,3 +1,5 @@
+package arraytable;
+
 public class SingleLinkedListDemo {
     public static void main(String[] args) {
         //创建节点

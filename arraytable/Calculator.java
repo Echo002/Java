@@ -1,3 +1,5 @@
+package arraytable;
+
 public class Calculator {
     public static void main(String[] args) {
         String expression = "7-6-1-8";

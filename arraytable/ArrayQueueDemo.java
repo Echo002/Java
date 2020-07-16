@@ -1,3 +1,5 @@
+package arraytable;
+
 import java.util.Scanner;
 
 public class ArrayQueueDemo {
