@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.LinkedList;
 
 public class Graph{
     private ArrayList<String> vertexList;
@@ -10,8 +11,8 @@ public class Graph{
 
     public static void main(String[] args) {
         // 测试图的创建
-        int n = 5;
-        String Vertexs[] = {"A", "B", "C", "D", "E"};
+        int n = 8;
+        String Vertexs[] = {"1", "2", "3", "4", "5", "6", "7", "8"};
         // 创建图对象
         Graph graph = new Graph(n);
         for (String vertex: Vertexs){
@@ -20,9 +21,13 @@ public class Graph{
         // 添加边AB AC BC BD BE
         graph.insertEdge(0, 1, 1);
         graph.insertEdge(0, 2, 1);
-        graph.insertEdge(1, 2, 1);
         graph.insertEdge(1, 3, 1);
         graph.insertEdge(1, 4, 1);
+        graph.insertEdge(3, 7, 1);
+        graph.insertEdge(4, 7, 1);
+        graph.insertEdge(2, 5, 1);
+        graph.insertEdge(2, 6, 1);
+        graph.insertEdge(5, 6, 1);
 
         // 显示邻接矩阵
         graph.showGraph();
@@ -30,6 +35,9 @@ public class Graph{
         // 测试dfs
         System.out.println("深度遍历");
         graph.dfs();
+
+        System.out.println("\n广度遍历");
+        graph.bfs();
     }
 
     // 构造器
@@ -38,8 +46,77 @@ public class Graph{
         edges = new int[n][n];
         vertexList = new ArrayList<String>(n);
         numOfEdges = 0;
-        isVisited = new boolean[5];
     }
+
+    // 对dfs进行重载
+    public void dfs() {
+        // 遍历所有的结点进行dfs
+        isVisited = new boolean[8];
+        for(int i = 0; i < getNumOfVertex(); i++){
+            if(!isVisited[i]){
+                dfs(isVisited, i);
+            }
+        } 
+    }
+
+    // 深度优先(dfs)
+    private void dfs(boolean[] isVisited, int i) {
+        // 首先我们访问该结点
+        System.out.print(getValueByIndex(i) + "->");
+        // 将该结点设置为已访问过
+        isVisited[i] = true;
+        
+        // 查找结点i的第一个邻接结点 
+        int w = getFirstNeighbor(i);
+        while(w != -1){ //说明有邻接结点
+            if(!isVisited[w]){
+                dfs(isVisited, w);
+            }
+            w = getNextNeighbor(i, w);
+        }
+    }
+
+    // 对bfs进行重载
+    public void bfs(){
+        isVisited = new boolean[8];
+        for(int i = 0; i < getNumOfVertex(); i++){
+            if(!isVisited[i]){
+                bfs(isVisited, i);
+            }
+        }
+    }
+
+    // 广度优先(bfs)
+    private void bfs(boolean[] isVisited, int i){
+        int u;  // 头结点对应的下标
+        int w;  // 邻接结点
+        // 队列，记录结点访问顺序
+        LinkedList queue = new LinkedList();
+        System.out.print(getValueByIndex(i) + "=>");
+        // 标记已被访问
+        isVisited[i] = true;
+        // 将结点加入队列
+        queue.addLast(i);
+        while(!queue.isEmpty()){
+            // 取出队列的头结点下标
+            u = (Integer)queue.removeFirst();
+            // 得到第一个邻接点的下标 w
+            w = getFirstNeighbor(u);
+            while(w != -1){ // 找到
+                if(!isVisited[w]){
+                    System.out.print(getValueByIndex(w) + "=>");
+                    // 标记已经访问
+                    isVisited[w] = true;
+                    // 入队
+                    queue.addLast(w);
+                }
+                // 以u为前驱结点找w后的下一个邻接点
+                w = getNextNeighbor(u, w);  // 体现出广度优先
+            }
+        }
+    }
+
+    // 图中常用的方法
 
     // 得到第一个邻接结点的下标 w,如果存在就返回对应的下标， 否则为-1
     public int getFirstNeighbor(int index){
@@ -61,35 +138,6 @@ public class Graph{
         return -1;
     }
 
-    // 对dfs进行重载
-    public void dfs() {
-        // 遍历所有的结点进行dfs
-        for(int i = 0; i < getNumOfVertex(); i++){
-            if(!isVisited[i]){
-                dfs(isVisited, i);
-            }
-        } 
-    }
-
-    // 深度优先
-    private void dfs(boolean[] isVisited, int i) {
-        // 首先我们访问该结点
-        System.out.print(getValueByIndex(i) + "->");
-        // 将该结点设置为已访问过
-        isVisited[i] = true;
-        
-        // 查找结点i的第一个邻接结点 
-        int w = getFirstNeighbor(i);
-        while(w != -1){ //说明有邻接结点
-            if(!isVisited[w]){
-                dfs(isVisited, w);
-            }
-            w = getNextNeighbor(i, w);
-        }
-
-    }
-
-    // 图中常用的方法
     // 返回结点的个数
     public int getNumOfVertex(){
         return vertexList.size();
